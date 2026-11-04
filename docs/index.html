@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Hedgehog and the Fox</title>
+<meta name="description" content="The fox knows many things, the hedgehog one big thing. A woodland walk from Archilochus to Berlin, Tetlock and Collins, with toys and a quiz: are you a fox or a hedgehog?">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nanobotco.github.io/hedgehog-fox/">
+<meta property="og:title" content="The Hedgehog and the Fox">
+<meta property="og:description" content="The fox knows many things, the hedgehog one big thing. Toys, thinkers and a quiz: are you a fox or a hedgehog?">
+<meta property="og:image" content="https://nanobotco.github.io/hedgehog-fox/card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A fox and a hedgehog under pine trees at night, with fireflies.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Nunito:wght@400;700;800&display=swap">
+<style>
+:root{--night:#14231c;--pine:#1f3a2c;--moss:#4f7a3a;--leaf:#8fb456;--bark:#5a3d2b;--paper:#fbf3e2;--ink:#2b2117;--fox:#e8742a;--fox2:#c45317;--hog:#8a6a4f;--hog2:#5e4532;--cap:#c8372d;--glow:#ffe58a;--muted:#6b5a48}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--night);color:var(--paper);font:400 18px/1.55 Nunito,system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.15;margin:0 0 .4em}
+a{color:var(--glow)}
+button{font:inherit;cursor:pointer}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+#flies{position:fixed;inset:0;pointer-events:none;z-index:0}
+.fly{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--glow);box-shadow:0 0 10px 3px rgba(255,229,138,.6);animation:drift var(--d) ease-in-out infinite alternate,blink 2.6s ease-in-out infinite;animation-delay:var(--dl),var(--dl)}
+@keyframes drift{to{transform:translate(var(--x),var(--y))}}
+@keyframes blink{0%,100%{opacity:.15}50%{opacity:1}}
+main{position:relative;z-index:1}
+/* hero */
+.hero{position:relative;min-height:92vh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;background:radial-gradient(ellipse at 75% 18%,#2f5240 0,#14231c 60%)}
+.moon{position:absolute;right:12%;top:9%;width:84px;height:84px;border-radius:50%;background:#fff4cf;box-shadow:0 0 60px 20px rgba(255,240,190,.25)}
+.trees{position:absolute;inset:auto 0 0 0;width:100%;height:70%}
+.hero .wrap{position:relative;padding-bottom:28px;width:100%}
+.kicker{font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--leaf);font-size:14px}
+.hero h1{font-size:clamp(40px,9vw,78px);color:#fff7e6;text-shadow:0 4px 20px rgba(0,0,0,.5)}
+.quote{font-family:Fraunces,Georgia,serif;font-size:clamp(20px,4.2vw,30px);max-width:640px;color:#fdebc4}
+.quote small{display:block;font:700 15px Nunito,sans-serif;color:var(--leaf);margin-top:6px}
+.stage{position:relative;height:170px;margin-top:10px}
+.stage .ground{position:absolute;left:-16px;right:-16px;bottom:0;height:34px;background:#2a4a31;border-radius:50% 50% 0 0/100% 100% 0 0}
+#fox{position:absolute;left:4%;bottom:18px;width:170px;cursor:pointer;transition:transform .35s cubic-bezier(.3,1.6,.5,1);touch-action:manipulation}
+#hog{position:absolute;right:6%;bottom:18px;width:120px;cursor:pointer;touch-action:manipulation}
+.bubble{position:absolute;left:4%;bottom:150px;background:var(--paper);color:var(--ink);padding:6px 12px;border-radius:14px;font-weight:800;font-size:15px;opacity:0;transform:translateY(8px);transition:.25s;white-space:nowrap}
+.bubble.on{opacity:1;transform:none}
+.bubble.r{left:auto;right:4%}
+.tally{font-size:14px;color:#cfe3b5;margin-top:4px}
+.hog-open,.hog-ball{transition:opacity .25s,transform .4s cubic-bezier(.3,1.6,.5,1);transform-origin:60px 55px}
+.curled .hog-open{opacity:0;transform:scale(.6)}
+.hog-ball{opacity:0;transform:scale(.4) rotate(-90deg)}
+.curled .hog-ball{opacity:1;transform:none}
+.pounce{transform:translate(40px,-50px) rotate(-12deg)}
+.dig{transform:translateY(16px) scaleY(.85)}
+.spin{transform:rotate(360deg)}
+.back{transform:scaleX(-1) translateX(-20px)}
+.flat{transform:translateY(10px) rotate(180deg) scaleY(.6)}
+.hop{transform:translateY(-30px)}
+/* sections */
+section{padding:56px 0}
+.paper{background:var(--paper);color:var(--ink)}
+.paper a{color:var(--fox2)}
+.moss{background:#20382a}
+.sec-h{display:flex;align-items:center;gap:12px}
+.sec-h svg{flex:0 0 auto}
+h2{font-size:clamp(28px,6vw,44px)}
+.paper h2{color:var(--pine)}
+.lead{font-size:20px}
+.note{font-size:14px;color:var(--muted)}
+.moss .note{color:#b9cfa3}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:18px 0 0}
+.fact{background:#fff;border:2px solid #e8d9b8;border-radius:16px;padding:14px 16px}
+.fact b{display:block;font-family:Fraunces,serif;font-size:19px;color:var(--bark)}
+/* sorter */
+.sorter{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:start;margin-top:18px}
+.den{min-height:150px;border-radius:20px;padding:12px;background:#2a4a31;border:3px dashed #5f8a4a}
+.den h3{font-size:20px;display:flex;gap:8px;align-items:center}
+.den .chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:var(--paper);color:var(--ink);border-radius:999px;padding:3px 10px;font-weight:800;font-size:14px;animation:pop .35s}
+.chip.miss{background:#ffd3c4}
+@keyframes pop{from{transform:scale(.3)}to{transform:none}}
+.card-now{width:min(220px,40vw);text-align:center;background:var(--paper);color:var(--ink);border-radius:20px;padding:16px 10px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.card-now .who{font-family:Fraunces,serif;font-size:24px;font-weight:800}
+.card-now .what{font-size:14px;color:var(--muted);min-height:42px}
+.card-now .btns{display:flex;gap:8px;justify-content:center;margin-top:8px}
+.pick{border:0;border-radius:12px;padding:8px 10px;font-weight:800;color:#fff}
+.pick.f{background:var(--fox)}
+.pick.h{background:var(--hog2)}
+.verdict{min-height:28px;font-weight:800;margin-top:10px;color:var(--glow)}
+@media (max-width:620px){.sorter{grid-template-columns:1fr 1fr}.card-now{grid-column:1/-1;grid-row:1;width:100%}}
+/* forecast */
+.sim{background:#fff;border:2px solid #e8d9b8;border-radius:18px;padding:16px;margin-top:16px}
+.bars{display:grid;gap:10px;margin:12px 0}
+.bar{display:grid;grid-template-columns:7.2em 1fr 3em;white-space:nowrap;gap:8px;align-items:center;font-weight:800}
+.track{height:24px;background:#f1e6cf;border-radius:12px;overflow:hidden}
+.fill{height:100%;width:0;border-radius:12px;transition:width .5s}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.go{border:0;border-radius:12px;padding:10px 16px;background:var(--moss);color:#fff;font-weight:800}
+.go.alt{background:#e8d9b8;color:var(--ink)}
+input[type=range]{accent-color:var(--fox);width:min(260px,100%)}
+/* circles */
+#venn{width:100%;max-width:520px;display:block;margin:12px auto 0;touch-action:none;background:#173024;border-radius:24px}
+#venn circle.c{cursor:grab;mix-blend-mode:screen}
+#venn text{font:800 21px Nunito,sans-serif;fill:#fff;pointer-events:none}
+#vennmsg{text-align:center;font-weight:800;min-height:28px;color:var(--glow)}
+/* modern cards */
+.flips{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:18px}
+.flip{perspective:900px;height:210px;border:0;background:none;padding:0;text-align:left;color:inherit}
+.flip .in{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.flip.on .in{transform:rotateY(180deg)}
+.flip .fa,.flip .ba{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;padding:16px;display:flex;flex-direction:column}
+.flip .fa{background:#fff;border:2px solid #e8d9b8}
+.flip .ba{background:var(--pine);color:var(--paper);transform:rotateY(180deg);font-size:16px}
+.flip .nm{font-family:Fraunces,serif;font-size:22px;font-weight:800;color:var(--pine)}
+.flip .bk{color:var(--muted);font-size:15px}
+.flip .tag{margin-top:auto;font-weight:800;font-size:14px}
+.tag.f{color:var(--fox2)}.tag.h{color:var(--hog2)}.tag.b{color:var(--moss)}
+.ba .tag{color:var(--glow)}
+/* quiz */
+.quiz{background:var(--paper);color:var(--ink);border-radius:24px;padding:20px;margin-top:16px;box-shadow:0 14px 40px rgba(0,0,0,.35)}
+.acorns{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:12px}
+.acorns i{width:14px;height:14px;border-radius:50% 50% 50% 50%/40% 40% 60% 60%;background:#e8d9b8}
+.acorns i.done{background:var(--bark)}
+.acorns i.now{background:var(--fox)}
+.qkind{font-weight:800;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--moss)}
+.qtext{font-family:Fraunces,serif;font-size:clamp(21px,4.5vw,27px);margin:6px 0 14px}
+.opts{display:grid;gap:8px}
+.opt{border:2px solid #e8d9b8;background:#fff;border-radius:14px;padding:12px 14px;text-align:left;font-weight:700;color:var(--ink);transition:.15s}
+.opt:hover{border-color:var(--moss)}
+.opt.right{background:#dff0c8;border-color:var(--moss)}
+.opt.wrong{background:#ffe0d6;border-color:var(--cap)}
+.why{min-height:24px;margin-top:10px;font-size:16px;color:var(--muted)}
+.result{text-align:center}
+.result .big{font-family:Fraunces,serif;font-size:clamp(34px,8vw,56px);font-weight:800;color:var(--pine)}
+.meter{position:relative;height:22px;border-radius:11px;background:linear-gradient(90deg,var(--hog2),#d9c7a3 50%,var(--fox));margin:18px 0 6px}
+.meter b{position:absolute;top:-9px;width:40px;height:40px;margin-left:-20px;border-radius:50%;background:#fff;border:3px solid var(--ink);transition:left 1s cubic-bezier(.3,1.4,.5,1);display:grid;place-items:center;font-size:20px}
+.ends{display:flex;justify-content:space-between;font-weight:800;font-size:14px}
+.mush{position:absolute;bottom:20px;width:34px;cursor:pointer;transition:transform .3s cubic-bezier(.3,2,.5,1);touch-action:manipulation}
+.mush.boing{transform:scaleY(1.35) translateY(-6px)}
+footer{padding:40px 0 60px;font-size:14px;color:#b9cfa3}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="flies" aria-hidden="true"></div>
+<main>
+<header class="hero">
+<div class="moon" aria-hidden="true"></div>
+<svg class="trees" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMax slice" aria-hidden="true" id="trees"></svg>
+<div class="wrap">
+<div class="kicker">A woodland walk · 650 BCE to now</div>
+<h1>The Hedgehog and the Fox</h1>
+<p class="quote">“The fox knows many things, but the hedgehog knows one big thing.”<small>Archilochus, Greek poet, about 650 BCE</small></p>
+<div class="stage" id="stage">
+<div class="bubble" id="foxsay"></div>
+<div class="bubble r" id="hogsay"></div>
+<div id="fox" role="button" tabindex="0" aria-label="Fox. Tap for a trick."></div>
+<div id="hog" role="button" tabindex="0" aria-label="Hedgehog. Tap to curl up."></div>
+<div class="ground"></div>
+</div>
+<div class="tally" id="tally">Tap the fox.</div>
+</div>
+</header>
+
+<section class="paper" id="archilochus">
+<div class="wrap">
+<div class="sec-h"><span id="ic1"></span><h2>Archilochus</h2></div>
+<p class="lead">A poet and soldier from the Greek island of Paros. Of all his work, only scraps survive, copied by later writers. One scrap is a single line about two animals.</p>
+<p>Nobody knows what he meant. One old reading is plain woodland sense: the fox has a hundred tricks, the hedgehog has one, and the one works. The fox sniffs, circles, digs and pounces. The hedgehog rolls into a ball of spines, and the fox goes home hungry.</p>
+<div class="facts">
+<div class="fact"><b>The shield</b>He wrote a poem about throwing his shield in a bush to run from a battle, then said he would buy another one just as good. Greek soldiers were not supposed to say that.</div>
+<div class="fact"><b>Erasmus, 1500</b>The Dutch scholar put the fox-and-hedgehog line in his <i>Adagia</i>, a big book of old sayings, and it travelled across Europe.</div>
+<div class="fact"><b>Spines</b>A European hedgehog carries about 5,000 to 7,000 spines. A muscle along its back pulls them into a ball.</div>
+<div class="fact"><b>Many tricks</b>Red foxes hunt mice under snow by listening, then leaping high and diving nose first.</div>
+</div>
+</div>
+</section>
+
+<section class="moss" id="berlin">
+<div class="wrap">
+<div class="sec-h"><span id="ic2"></span><h2>Isaiah Berlin sorts the thinkers</h2></div>
+<p class="lead">In 1953 the Oxford thinker Isaiah Berlin wrote an essay called <i>The Hedgehog and the Fox</i>. He split great writers in two.</p>
+<p><b>Hedgehogs</b> see the world through one big idea that explains everything. <b>Foxes</b> chase many ideas, often loose and even in conflict, and enjoy the world as it comes. Berlin later said he meant it as a game. People have played it ever since.</p>
+<p><b>Your turn.</b> Where did Berlin put each one?</p>
+<div class="sorter">
+<div class="den" id="denF"><h3><span id="ic3"></span>Fox den</h3><div class="chips"></div></div>
+<div class="card-now" id="cardnow"><div class="who"></div><div class="what"></div><div class="btns"><button class="pick f" data-a="F">Fox</button><button class="pick h" data-a="H">Hedgehog</button></div></div>
+<div class="den" id="denH"><h3><span id="ic4"></span>Burrow</h3><div class="chips"></div></div>
+</div>
+<div class="verdict" id="sortmsg"></div>
+</div>
+</section>
+
+<section class="paper" id="tetlock">
+<div class="wrap">
+<div class="sec-h"><span id="ic5"></span><h2>Philip Tetlock counts the guesses</h2></div>
+<p class="lead">From 1984 to 2003 the psychologist Philip Tetlock asked 284 experts to forecast world events. Elections, wars, markets: 82,361 forecasts in all. Then he waited to see who was right.</p>
+<p>Most experts did little better than a chimp throwing darts. But one group did better: the <b>foxes</b>, who used many small ideas, said “maybe” a lot, and changed their minds. The <b>hedgehogs</b>, sure of one big theory, did worst, and worst of all on their own subject. His book is <i>Expert Political Judgment</i> (2005). Later he ran a forecasting contest with thousands of volunteers, and his best ones, the “superforecasters”, beat professional analysts.</p>
+<div class="sim">
+<b>Forest forecasting toy.</b> Each season the forest asks a yes-or-no question: will it snow early, will the beech nuts be thick? The fox says a careful chance. The hedgehog bets big on his one theory. The chimp always says 50%. Lower score is better (a <i>Brier score</i>: the squared distance between the forecast and what happened).
+<div class="bars">
+<div class="bar"><span>🦊 Fox</span><div class="track"><div class="fill" id="bF" style="background:var(--fox)"></div></div><span id="sF">–</span></div>
+<div class="bar"><span>🦔 Hedgehog</span><div class="track"><div class="fill" id="bH" style="background:var(--hog2)"></div></div><span id="sH">–</span></div>
+<div class="bar"><span>🐒 Chimp</span><div class="track"><div class="fill" id="bC" style="background:#9a9a9a"></div></div><span id="sC">–</span></div>
+</div>
+<div class="row"><button class="go" id="run">Run 25 seasons</button><button class="go alt" id="reset">Start over</button><span class="note" id="seasons">0 seasons</span></div>
+<p class="row" style="margin:12px 0 0"><label for="sure">How sure is the hedgehog? <b id="surev">90%</b></label><input type="range" id="sure" min="55" max="100" value="90"></p>
+<p class="note">A toy with made-up seasons, not Tetlock’s data. Slide the hedgehog down toward 60% and watch him grow foxy.</p>
+</div>
+</div>
+</section>
+
+<section class="moss" id="collins">
+<div class="wrap">
+<div class="sec-h"><span id="ic6"></span><h2>Jim Collins votes hedgehog</h2></div>
+<p class="lead">In the business book <i>Good to Great</i> (2001), Jim Collins sided with the hedgehog. His “Hedgehog Concept” is where three circles meet:</p>
+<p>what you care about most, what you can be the best in the world at, and what drives your economic engine (what earns the money). Find the middle, then do that one thing for years.</p>
+<p><b>Drag the circles together</b> until a hedgehog moves in.</p>
+<svg id="venn" viewBox="0 0 520 380" aria-label="Three circles you can drag"></svg>
+<div id="vennmsg"></div>
+</div>
+</section>
+
+<section class="paper" id="moderns">
+<div class="wrap">
+<div class="sec-h"><span id="ic7"></span><h2>More modern thinkers</h2></div>
+<p>Tap a card to turn it.</p>
+<div class="flips" id="flips"></div>
+</div>
+</section>
+
+<section class="moss" id="quiz">
+<div class="wrap">
+<div class="sec-h"><span id="ic8"></span><h2>Fox or hedgehog? The quiz</h2></div>
+<p class="lead">Ten things to know and eight questions about you. At the end: how many things you know, your one big thing, and which animal you are.</p>
+<div class="quiz" id="q"></div>
+</div>
+</section>
+
+<footer>
+<div class="wrap" style="position:relative">
+<p>Archilochus, fragment 201 (West). Berlin, <i>The Hedgehog and the Fox</i> (1953). Tetlock, <i>Expert Political Judgment</i> (2005) and, with Dan Gardner, <i>Superforecasting</i> (2015). Collins, <i>Good to Great</i> (2001). Silver, <i>The Signal and the Noise</i> (2012). Dworkin, <i>Justice for Hedgehogs</i> (2011). Gould, <i>The Hedgehog, the Fox, and the Magister’s Pox</i> (2003). Gaddis, <i>On Grand Strategy</i> (2018).</p>
+<p>Text CC BY 4.0, NaNoBotCo. Code MIT. Drawings made in code. · <a href="https://github.com/NaNoBotCo/hedgehog-fox">GitHub</a></p>
+<div id="mushes" style="position:relative;height:60px"></div>
+</div>
+</footer>
+</main>
+
+<script>
+const $=s=>document.querySelector(s);
+const rnd=(a,b)=>a+Math.random()*(b-a);
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+
+/* drawings */
+function hogSVG(){
+  let sp='',ball='';
+  for(let i=0;i<=22;i++){const a=Math.PI*(1.02+i*0.95/22),x=60+42*Math.cos(a),y=52+28*Math.sin(a),x2=60+60*Math.cos(a-0.05),y2=52+44*Math.sin(a-0.05),x3=60+42*Math.cos(a+0.09),y3=52+28*Math.sin(a+0.09);sp+=`<path d="M${x.toFixed(1)} ${y.toFixed(1)}L${x2.toFixed(1)} ${y2.toFixed(1)}L${x3.toFixed(1)} ${y3.toFixed(1)}Z"/>`}
+  for(let i=0;i<30;i++){const a=i*Math.PI*2/30,r1=26,r2=40;ball+=`<path d="M${(60+r1*Math.cos(a)).toFixed(1)} ${(55+r1*Math.sin(a)).toFixed(1)}L${(60+r2*Math.cos(a+0.05)).toFixed(1)} ${(55+r2*Math.sin(a+0.05)).toFixed(1)}L${(60+r1*Math.cos(a+0.2)).toFixed(1)} ${(55+r1*Math.sin(a+0.2)).toFixed(1)}Z"/>`}
+  return `<svg viewBox="0 0 130 90" width="100%"><g class="hog-open"><g fill="var(--hog2)">${sp}</g><ellipse cx="60" cy="54" rx="44" ry="26" fill="var(--hog)"/><g stroke="var(--hog2)" stroke-width="2" stroke-linecap="round"><path d="M30 44l-6-8M42 38l-3-9M56 34l0-9M70 35l4-9M84 40l6-7"/></g><ellipse cx="98" cy="62" rx="20" ry="13" fill="#e2c49b"/><circle cx="117" cy="62" r="4.5" fill="#1d1410"/><circle cx="100" cy="56" r="3" fill="#1d1410"/><circle cx="101" cy="55" r="1" fill="#fff"/><ellipse cx="90" cy="51" rx="4" ry="3" fill="#c9a77d"/><g fill="#3a2a1e"><ellipse cx="44" cy="80" rx="6" ry="3.5"/><ellipse cx="82" cy="80" rx="6" ry="3.5"/></g></g><g class="hog-ball"><g fill="var(--hog2)">${ball}</g><circle cx="60" cy="55" r="28" fill="var(--hog)"/><path d="M44 48q16-12 32 0M42 60q18-10 36 0" stroke="var(--hog2)" stroke-width="2.5" fill="none" stroke-linecap="round"/></g></svg>`;
+}
+function foxSVG(){
+  return `<svg viewBox="0 0 200 130" width="100%"><path d="M58 78C30 70 6 82 4 104c14-6 30-4 44-12 10-6 14-10 10-14z" fill="var(--fox)"/><path d="M4 104c6-2 12-3 18-6-8 10-16 10-18 6z" fill="#fff8ec"/><ellipse cx="96" cy="80" rx="44" ry="22" fill="var(--fox)"/><path d="M70 92q26 14 54 0" fill="#fff8ec"/><g stroke="#2a1a12" stroke-width="7" stroke-linecap="round"><path d="M72 96v24M90 98v22M112 98v22M128 94v26"/></g><path d="M126 70l26-30 30 22-10 16-30 6z" fill="var(--fox)"/><path d="M150 40l-4-26 16 20z" fill="var(--fox2)"/><path d="M164 46l6-24 8 26z" fill="var(--fox2)"/><path d="M152 38l-2-16 9 13zM166 44l4-15 4 16z" fill="#2a1a12"/><path d="M172 78l24-6-14-12z" fill="#fff8ec"/><circle cx="196" cy="72" r="4" fill="#1d1410"/><circle cx="162" cy="56" r="3.4" fill="#1d1410"/><circle cx="163" cy="55" r="1.1" fill="#fff"/><path d="M134 76q14 12 38 2" fill="#fff8ec"/></svg>`;
+}
+function tinyFox(s=34){return `<svg width="${s}" height="${s}" viewBox="0 0 40 40"><path d="M6 6l9 10h10l9-10-3 18-11 12L9 24z" fill="var(--fox)"/><path d="M9 24l11 12 11-12-11 4z" fill="#fff8ec"/><circle cx="15" cy="21" r="2" fill="#1d1410"/><circle cx="25" cy="21" r="2" fill="#1d1410"/><circle cx="20" cy="33" r="2" fill="#1d1410"/></svg>`}
+function tinyHog(s=34){let p='';for(let i=0;i<9;i++){const a=Math.PI*(1.05+i*0.11);p+=`<path d="M${20+12*Math.cos(a)} ${24+10*Math.sin(a)}L${20+19*Math.cos(a)} ${24+17*Math.sin(a)}L${20+12*Math.cos(a+.1)} ${24+10*Math.sin(a+.1)}Z"/>`}return `<svg width="${s}" height="${s}" viewBox="0 0 40 40"><g fill="var(--hog2)">${p}</g><ellipse cx="18" cy="26" rx="13" ry="9" fill="var(--hog)"/><ellipse cx="30" cy="29" rx="7" ry="5" fill="#e2c49b"/><circle cx="37" cy="29" r="2" fill="#1d1410"/><circle cx="30" cy="26" r="1.5" fill="#1d1410"/></svg>`}
+function acornSVG(s=34){return `<svg width="${s}" height="${s}" viewBox="0 0 40 40"><path d="M10 16q10-10 20 0z" fill="var(--bark)"/><path d="M20 6v6" stroke="var(--bark)" stroke-width="3" stroke-linecap="round"/><path d="M11 16q0 18 9 20q9-2 9-20z" fill="#c98a3d"/></svg>`}
+function mushSVG(){return `<svg viewBox="0 0 40 44" width="100%"><path d="M15 22h10l2 20H13z" fill="#f3e7cf"/><path d="M2 24C2 10 12 2 20 2s18 8 18 22z" fill="var(--cap)"/><g fill="#fff"><circle cx="12" cy="13" r="3"/><circle cx="24" cy="9" r="2.4"/><circle cx="30" cy="18" r="2.6"/><circle cx="18" cy="19" r="2"/></g></svg>`}
+
+$('#fox').innerHTML=foxSVG();
+$('#hog').innerHTML=hogSVG();
+['#ic1','#ic5'].forEach(s=>$(s).innerHTML=acornSVG(38));
+$('#ic2').innerHTML=tinyFox(38);$('#ic3').innerHTML=tinyFox(26);$('#ic4').innerHTML=tinyHog(26);
+$('#ic6').innerHTML=tinyHog(38);$('#ic7').innerHTML=tinyFox(38);$('#ic8').innerHTML=tinyHog(38);
+
+/* trees */
+(function(){let g='';const cols=['#1a2e24','#203a2c','#254433'];
+  for(let layer=0;layer<3;layer++){for(let i=0;i<14;i++){const x=i*95+rnd(-30,30)+layer*40,h=rnd(220,420)-layer*60,w=h*0.42,base=600-layer*10;
+    g+=`<g fill="${cols[layer]}"><rect x="${x-6}" y="${base-40}" width="12" height="40" fill="#2b2017"/><path d="M${x} ${base-h}L${x+w/2} ${base-40}H${x-w/2}Z"/><path d="M${x} ${base-h*0.8}L${x+w*0.6} ${base-h*0.25}H${x-w*0.6}Z"/></g>`}}
+  g+='<rect x="0" y="585" width="1200" height="15" fill="#1a2e24"/>';
+  $('#trees').innerHTML=g;})();
+
+/* fireflies */
+(function(){const f=$('#flies'),n=matchMedia('(max-width:620px)').matches?14:26;
+  for(let i=0;i<n;i++){const d=document.createElement('i');d.className='fly';d.style.left=rnd(0,100)+'%';d.style.top=rnd(5,95)+'%';d.style.setProperty('--d',rnd(5,11)+'s');d.style.setProperty('--dl',(-rnd(0,8))+'s');d.style.setProperty('--x',rnd(-80,80)+'px');d.style.setProperty('--y',rnd(-60,60)+'px');f.appendChild(d)}})();
+
+/* fox tricks vs hedgehog */
+(function(){
+  const tricks=[['Pounce!','pounce'],['Dig!','dig'],['Spin!','spin'],['Double back!','back'],['Play dead!','flat'],['Hop!','hop'],['Sneak!','dig'],['Sniff sniff','hop'],['Circle round','spin'],['Leap!','pounce']];
+  const hogLines=['Ball.','Still a ball.','Ball again.','Yes, ball.','One trick. Ball.'];
+  let n=0,used=new Set(),t1,t2;const fox=$('#fox'),hog=$('#hog'),fs=$('#foxsay'),hs=$('#hogsay');
+  function say(el,txt){el.textContent=txt;el.classList.add('on');}
+  function trick(){const [w,c]=tricks[n%tricks.length];n++;used.add(w);
+    fox.className='';void fox.offsetWidth;fox.classList.add(c);say(fs,w);
+    hog.classList.add('curled');
+    clearTimeout(t1);clearTimeout(t2);
+    t1=setTimeout(()=>{fox.className='';say(hs,pick(hogLines));},450);
+    t2=setTimeout(()=>{fs.classList.remove('on');hs.classList.remove('on');hog.classList.remove('curled')},2200);
+    $('#tally').textContent=`Fox tricks tried: ${used.size}. Hedgehog tricks: 1. Mice eaten: 0.`;}
+  fox.onclick=trick;fox.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();trick()}};
+  const curl=()=>{hog.classList.toggle('curled')};hog.onclick=curl;hog.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();curl()}};
+})();
+
+/* Berlin sorter */
+(function(){
+  const list=[['Plato','Greek philosopher, one world of perfect Forms','H'],['Shakespeare','Plays about every kind of person','F'],['Dante','A whole universe in one poem','H'],['Montaigne','Essays about anything at all','F'],['Dostoevsky','Novels driven by one question of faith','H'],['Pushkin','Russian poet of many moods','F'],['Nietzsche','Philosopher of the will to power','H'],['Joyce','Ulysses: every style in one book','F'],['Proust','One long novel about memory','H'],['Aristotle','Wrote on biology, poetry, politics, logic…','F'],['Tolstoy','Author of War and Peace','T']];
+  let i=0,right=0;const box=$('#cardnow');
+  function show(){if(i>=list.length){box.querySelector('.who').textContent='All sorted';box.querySelector('.what').textContent=`You matched Berlin ${right} of ${list.length-1} times.`;box.querySelector('.btns').innerHTML='<button class="pick f" id="again">Again</button>';$('#again').onclick=()=>{i=0;right=0;document.querySelectorAll('.den .chips').forEach(c=>c.innerHTML='');$('#sortmsg').textContent='';box.querySelector('.btns').innerHTML='<button class="pick f" data-a="F">Fox</button><button class="pick h" data-a="H">Hedgehog</button>';bind();show()};return}
+    box.querySelector('.who').textContent=list[i][0];box.querySelector('.what').textContent=list[i][1];}
+  function bind(){box.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>answer(b.dataset.a))}
+  function answer(a){const [nm,,ans]=list[i];
+    if(ans==='T'){$('#sortmsg').textContent='Tolstoy is the trick question. Berlin’s whole essay is about him: a fox by nature who believed we should be hedgehogs.';const c=document.createElement('span');c.className='chip';c.textContent='Tolstoy (both)';$('#denF .chips').appendChild(c);$('#denH .chips').appendChild(c.cloneNode(true));}
+    else{const ok=a===ans;if(ok)right++;const c=document.createElement('span');c.className='chip'+(ok?'':' miss');c.textContent=nm+(ok?'':' ↩');$(ans==='F'?'#denF .chips':'#denH .chips').appendChild(c);$('#sortmsg').textContent=ok?pick(['Berlin agrees.','Yes!','Right den.','Good nose.']):`Berlin put ${nm} with the ${ans==='F'?'foxes':'hedgehogs'}.`;}
+    i++;show();}
+  bind();show();
+})();
+
+/* forecasting toy */
+(function(){
+  let n=0,F=0,H=0,C=0;
+  const sure=$('#sure');sure.oninput=()=>{$('#surev').textContent=sure.value+'%'};
+  function season(){const p=rnd(0.05,0.95),out=Math.random()<p?1:0;
+    const fox=Math.min(.98,Math.max(.02,p+rnd(-.12,.12)));
+    const theoryRight=Math.random()<0.62;const s=sure.value/100;const hog=(theoryRight?out:1-out)?s:1-s;
+    F+=(fox-out)**2;H+=(hog-out)**2;C+=(0.5-out)**2;n++;}
+  function draw(){const v=[[F,'F'],[H,'H'],[C,'C']];v.forEach(([x,k])=>{const s=n?x/n:0;$('#b'+k).style.width=Math.min(100,s/0.4*100)+'%';$('#s'+k).textContent=n?s.toFixed(2):'–'});$('#seasons').textContent=n+' seasons'+(n?` · best: ${[['the fox',F],['the hedgehog',H],['the chimp',C]].sort((a,b)=>a[1]-b[1])[0][0]}`:'');}
+  $('#run').onclick=()=>{for(let k=0;k<25;k++)season();draw()};
+  $('#reset').onclick=()=>{n=F=H=C=0;draw()};
+})();
+
+/* Collins circles */
+(function(){
+  const svg=$('#venn'),NS='http://www.w3.org/2000/svg',R=92;
+  const cs=[{x:110,y:110,c:'#e8742a',t:['What you','care about']},{x:410,y:110,c:'#4f9ad1',t:['Best in','the world at']},{x:260,y:280,c:'#8fb456',t:['What earns','the money']}];
+  const hog=document.createElementNS(NS,'g');hog.innerHTML=hogSVG().replace('<svg viewBox="0 0 130 90" width="100%">','<svg viewBox="0 0 130 90" width="120" height="84" x="-60" y="-46">');hog.style.opacity=0;hog.style.transition='opacity .4s';
+  cs.forEach((o,k)=>{const g=document.createElementNS(NS,'g');const c=document.createElementNS(NS,'circle');c.setAttribute('r',R);c.setAttribute('class','c');c.setAttribute('fill',o.c);c.setAttribute('fill-opacity','.55');c.setAttribute('stroke',o.c);c.setAttribute('stroke-width','3');
+    const tx=document.createElementNS(NS,'text');tx.setAttribute('text-anchor','middle');tx.innerHTML=o.t.map((l,j)=>`<tspan x="0" dy="${j?24:-6}">${l}</tspan>`).join('');
+    g.append(c,tx);svg.appendChild(g);o.g=g;o.tx=tx;
+    c.addEventListener('pointerdown',e=>{c.setPointerCapture(e.pointerId);o.drag=true;c.style.cursor='grabbing'});
+    c.addEventListener('pointermove',e=>{if(!o.drag)return;const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;const p=pt.matrixTransform(svg.getScreenCTM().inverse());o.x=Math.max(20,Math.min(500,p.x));o.y=Math.max(20,Math.min(360,p.y));place()});
+    c.addEventListener('pointerup',()=>{o.drag=false;c.style.cursor='grab'});});
+  svg.appendChild(hog);
+  function place(){cs.forEach(o=>{o.g.setAttribute('transform',`translate(${o.x},${o.y})`)});
+    const mx=(cs[0].x+cs[1].x+cs[2].x)/3,my=(cs[0].y+cs[1].y+cs[2].y)/3;
+    const inAll=cs.every(o=>Math.hypot(o.x-mx,o.y-my)<R*0.62);
+    hog.setAttribute('transform',`translate(${mx},${my})`);hog.style.opacity=inAll?1:0;
+    cs.forEach(o=>o.tx.style.opacity=inAll?0:1);
+    $('#vennmsg').textContent=inAll?'A hedgehog moves in. That middle is your one big thing.':'';}
+  place();
+})();
+
+/* modern thinkers */
+(function(){
+  const people=[
+    ['Nate Silver','The Signal and the Noise, 2012','f','Fox','The election forecaster made a fox the logo of his website FiveThirtyEight. His book tells forecasters to think like foxes: many sources, odds instead of certainties, and update often.'],
+    ['Philip Tetlock & Dan Gardner','Superforecasting, 2015','f','Fox','The best forecasters in Tetlock’s contest were foxes: curious, humble, good with numbers, and quick to change a forecast by a few points when news came in.'],
+    ['Ronald Dworkin','Justice for Hedgehogs, 2011','h','Hedgehog','The legal philosopher argued that ethics, morals and law are one big thing. Good values fit together, so a careful person can make them agree.'],
+    ['Stephen Jay Gould','The Hedgehog, the Fox, and the Magister’s Pox, 2003','b','Both','The fossil scientist wanted science (one method, a hedgehog) and the humanities (many ways of knowing, a fox) to work as partners. The book came out the year after he died.'],
+    ['John Lewis Gaddis','On Grand Strategy, 2018','b','Both','The Yale historian says great leaders join the two: a hedgehog’s sense of where they are going and a fox’s eye for the ground under their feet.'],
+    ['Isaiah Berlin','The Hedgehog and the Fox, 1953','f','Fox','Most readers file Berlin himself with the foxes. He defended pluralism: the idea that good values can clash, with no single answer above them.']];
+  $('#flips').innerHTML=people.map(p=>`<button class="flip" aria-label="${p[0]}, tap to turn"><div class="in"><div class="fa"><span class="nm">${p[0]}</span><span class="bk">${p[1]}</span><span class="tag ${p[2]}">${p[2]==='f'?tinyFox(28):p[2]==='h'?tinyHog(28):tinyFox(28)+tinyHog(28)} ${p[3]}</span></div><div class="ba">${p[4]}<span class="tag">${p[3]}</span></div></div></button>`).join('');
+  document.querySelectorAll('.flip').forEach(b=>b.onclick=()=>b.classList.toggle('on'));
+})();
+
+/* quiz */
+(function(){
+  const know=[
+    ['Old poets','Archilochus came from which Greek island?',['Paros','Crete','Lesbos','Ithaca'],0,'Paros, in the Aegean.'],
+    ['Old poets','Who put the line in a big book of old sayings in 1500?',['Erasmus','Shakespeare','Dante','Martin Luther'],0,'Erasmus, in his Adagia.'],
+    ['Woodland','A baby hedgehog is called a…',['Hoglet','Pup','Spikelet','Kit'],0,'A hoglet. (A baby fox is a kit.)'],
+    ['Woodland','A group of foxes can be called a…',['Skulk','Pride','Murder','Parliament'],0,'A skulk. (Pride is lions, murder is crows, parliament is owls.)'],
+    ['Woodland','What does a hedgehog mostly eat?',['Beetles, worms and other small animals','Apples and milk','Grass','Mushrooms'],0,'Insects and worms. Milk makes hedgehogs sick.'],
+    ['Woodland','How does a hedgehog stop a fox?',['Rolls into a ball of spines','Runs very fast','Climbs a tree','Sprays a smell'],0,'The one big trick.'],
+    ['Modern thinkers','Berlin’s essay is mostly about which novelist?',['Leo Tolstoy','Charles Dickens','Jane Austen','Victor Hugo'],0,'Tolstoy: a fox who wished he were a hedgehog.'],
+    ['Modern thinkers','In Tetlock’s studies, who forecast better?',['Foxes','Hedgehogs','They tied','Nobody beat chance'],0,'Foxes, by a clear margin.'],
+    ['Modern thinkers','Which is NOT one of Jim Collins’s three circles?',['What your rivals are doing','What you care about','What you can be best at','What drives your economic engine'],0,'Rivals are not in it.'],
+    ['Modern thinkers','What animal was the logo of Nate Silver’s FiveThirtyEight?',['A fox','A hedgehog','An owl','A bear'],0,'A fox.']];
+  const you=[
+    ['A new idea walks into your head. You…',['Check how it fits your big picture','Try it on and see what happens']],
+    ['Your bookshelf is…',['Deep on a few subjects I love','A bit of everything']],
+    ['When a forecast of yours goes wrong, you think…',['I was right, the timing was off','Good, now I can update']],
+    ['Your favourite phrase is…',['“Obviously”','“It depends”']],
+    ['On a long walk in the woods you…',['Follow one path to the end','Take every side path']],
+    ['To win an argument you use…',['One strong reason','Many small reasons']],
+    ['Your plans look like…',['One big goal for years','Many small bets']],
+    ['The world is mostly…',['Explained by a few big forces','Messy, with many causes']]];
+  // shuffle answers for knowledge questions
+  const K=know.map(q=>{const o=q[2].map((t,j)=>({t,ok:j===q[3]}));for(let j=o.length-1;j>0;j--){const r=Math.floor(Math.random()*(j+1));[o[j],o[r]]=[o[r],o[j]]}return {cat:q[0],q:q[1],o,why:q[4]}});
+  const Y=you.map(q=>{const flip=Math.random()<.5;return {q:q[0],o:flip?[{t:q[1][1],v:1},{t:q[1][0],v:-1}]:[{t:q[1][0],v:-1},{t:q[1][1],v:1}]}});
+  const steps=[];K.forEach((k,i)=>{steps.push({k});if(i%2===1&&Y[(i-1)/2])steps.push({y:Y[(i-1)/2]})});Y.slice(5).forEach(y=>steps.push({y}));
+  let at=0,known=0,score=0;const byCat={};const box=$('#q');
+  function acorns(){return '<div class="acorns">'+steps.map((s,i)=>`<i class="${i<at?'done':i===at?'now':''}"></i>`).join('')+'</div>'}
+  function render(){
+    if(at>=steps.length)return result();
+    const s=steps[at];
+    if(s.k){box.innerHTML=acorns()+`<div class="qkind">A thing to know · ${s.k.cat}</div><div class="qtext">${s.k.q}</div><div class="opts">${s.k.o.map((o,j)=>`<button class="opt" data-j="${j}">${o.t}</button>`).join('')}</div><div class="why"></div>`;
+      box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const o=s.k.o[b.dataset.j];box.querySelectorAll('.opt').forEach((x,j)=>{x.disabled=true;if(s.k.o[j].ok)x.classList.add('right')});if(o.ok){known++;byCat[s.k.cat]=(byCat[s.k.cat]||0)+1}else b.classList.add('wrong');box.querySelector('.why').textContent=(o.ok?'Yes! ':'Not quite. ')+s.k.why;setTimeout(()=>{at++;render()},1500)});}
+    else{box.innerHTML=acorns()+`<div class="qkind">About you</div><div class="qtext">${s.y.q}</div><div class="opts">${s.y.o.map((o,j)=>`<button class="opt" data-j="${j}">${o.t}</button>`).join('')}</div><div class="why"></div>`;
+      box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{score+=s.y.o[b.dataset.j].v;at++;render()});}
+  }
+  function result(){
+    const cats=Object.entries(byCat).sort((a,b)=>b[1]-a[1]);
+    let animal,face,blurb;
+    if(score>=3){animal='Fox';face='🦊';blurb='You chase many ideas and change your mind when the facts change. Tetlock’s superforecasters would like you.'}
+    else if(score<=-3){animal='Hedgehog';face='🦔';blurb='You hold one big idea and stay with it. Jim Collins would hire you. Dante and Plato are in your burrow.'}
+    else {animal='Fox-hog';face='🦊🦔';blurb='A bit of both, the way John Lewis Gaddis likes his leaders: a hedgehog’s direction, a fox’s eyes.'}
+    const pos=50+score/8*45;
+    const things=known===1?'1 thing':known+' things';
+    box.innerHTML=`<div class="result"><div class="qkind">Your result</div><div class="big">${face} ${animal}</div><p class="lead">You know <b>${things}</b> out of 10.${!cats.length?'':animal==='Fox'?` Your many things: <b>${cats.map(c=>c[0]).join(', ')}</b>.`:` Your one big thing: <b>${cats[0][0]}</b>.`}</p><div class="meter"><b style="left:50%">${face.slice(0,2)}</b></div><div class="ends"><span>Hedgehog</span><span>Fox</span></div><p>${blurb}</p><div class="row" style="justify-content:center"><button class="go" id="share">Share my result</button><button class="go alt" id="redo">Take it again</button></div><div class="why" id="sharemsg"></div></div>`;
+    requestAnimationFrame(()=>setTimeout(()=>box.querySelector('.meter b').style.left=pos+'%',60));
+    $('#redo').onclick=()=>{at=0;known=0;score=0;for(const k in byCat)delete byCat[k];render();box.scrollIntoView({behavior:'smooth'})};
+    $('#share').onclick=async()=>{const text=`I'm a ${animal} ${face} and I know ${things}. The fox knows many things, the hedgehog one big thing. Which are you?`,url=location.href.split('#')[0]+'#quiz';
+      try{if(navigator.share){await navigator.share({title:'The Hedgehog and the Fox',text,url})}else{await navigator.clipboard.writeText(text+' '+url);$('#sharemsg').textContent='Copied. Paste it anywhere.'}}catch(e){}};
+  }
+  render();
+})();
+
+/* mushrooms */
+(function(){const m=$('#mushes');for(let i=0;i<7;i++){const d=document.createElement('div');d.className='mush';d.style.left=(6+i*13+rnd(-3,3))+'%';d.style.width=rnd(24,40)+'px';d.innerHTML=mushSVG();d.onclick=()=>{d.classList.add('boing');setTimeout(()=>d.classList.remove('boing'),300)};m.appendChild(d)}})();
+</script>
+</body>
+</html>

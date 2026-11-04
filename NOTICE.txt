@@ -1,0 +1,7 @@
+The Hedgehog and the Fox — what is in this repository, and under what terms.
+
+TEXT AND DRAWINGS — docs/index.html (words), docs/card.jpg, docs/icon.svg: Creative Commons Attribution 4.0 International (LICENSE). Credit: NaNoBotCo.
+
+CODE — the scripts in docs/index.html and tools/: MIT (LICENSE-CODE).
+
+QUOTED LINE — Archilochus, fragment 201 (West), about 650 BCE, in a common English rendering.
